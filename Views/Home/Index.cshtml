@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Entity Framework</h1>
+    <p>By.: Facundo Torraca - Okapii</p>
+    <div class="display-2">
+        <button class="btn btn-primary" onclick="popular()">Popular</button>
+    </div>
+</div>
+
+@section Scripts 
+{
+    <script type="text/javascript">
+        const popularSuccess = (response) => {
+            if (response.ok)
+                Swal.fire({
+                    title: 'Exito!',
+                    icon: 'success',
+                    text: response.mensaje
+                });
+            else
+                Swal.fire({
+                    title: 'Error!',
+                    icon: 'error',
+                    text: response.mensaje
+                });
+        }
+
+        const popular = () => {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Popular")',
+                success: popularSuccess
+            });
+        }
+    </script>    
+}
